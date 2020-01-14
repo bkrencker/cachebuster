@@ -1,0 +1,83 @@
+ID: cachebuster
+_schema-version: '2.1'
+parameters:
+  deploy_mode: html5-repo
+version: 0.0.1
+modules:
+  - name: cachebuster_appRouter
+    type: approuter.nodejs
+    path: cachebuster_appRouter
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: cachebuster_html5_repo_runtime
+      - name: srv_api
+        group: destinations
+        properties:
+          forwardAuthToken: true
+          name: srv_api
+          url: '~{url}'
+      - name: cachebuster-uaa
+  - name: cachebuster_ui_deployer
+    type: com.sap.html5.application-content
+    path: cachebuster_ui_deployer
+    requires:
+      - name: cachebuster_html5_repo_host
+    build-parameters:
+      requires:
+        - name: ui5
+          artifacts:
+            - './*'
+          target-path: resources/ui5
+  - name: cachebuster-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: cachebuster-db-hdi-container
+  - name: cachebuster-srv
+    type: nodejs
+    path: srv
+    parameters:
+      memory: 512M
+      disk-quota: 256M
+    provides:
+      - name: srv_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: cachebuster-db-hdi-container
+      - name: cachebuster-uaa
+  - name: ui5
+    type: html5
+    path: ui5
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+resources:
+  - name: cachebuster_html5_repo_runtime
+    parameters:
+      service-plan: app-runtime
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: cachebuster_html5_repo_host
+    parameters:
+      service-plan: app-host
+      service: html5-apps-repo
+    type: org.cloudfoundry.managed-service
+  - name: cachebuster-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: '${service-name}'
+  - name: cachebuster-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service-plan: application
+      service: xsuaa
+      config:
+        xsappname: 'cachebuster-${space}'
+        tenant-mode: dedicated
