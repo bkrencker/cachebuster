@@ -2,6 +2,7 @@ ID: cachebuster
 _schema-version: '2.1'
 parameters:
   deploy_mode: html5-repo
+  enable-parallel-deployments: true
 version: 0.0.1
 modules:
   - name: cachebuster_appRouter
@@ -73,6 +74,9 @@ resources:
     type: com.sap.xs.hdi-container
     properties:
       hdi-container-name: '${service-name}'
+    parameters:
+      service-plan: hdi-shared
+      service: hanatrial
   - name: cachebuster-uaa
     type: org.cloudfoundry.managed-service
     parameters:

@@ -1,4 +1,19 @@
 {
-  "authenticationMethod": "none",
-  "routes": []
+  "welcomeFile": "/trialemmiui5-1.0.0/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "/srv_api/(.*)$",
+      "target": "$1",
+      "authenticationType": "none",
+      "destination": "srv_api",
+      "csrfProtection": false
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
 }
