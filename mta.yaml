@@ -13,13 +13,13 @@ modules:
       memory: 256M
     requires:
       - name: cachebuster_html5_repo_runtime
+      - name: cachebuster-uaa
       - name: srv_api
         group: destinations
         properties:
           forwardAuthToken: true
           name: srv_api
           url: '~{url}'
-      - name: cachebuster-uaa
   - name: cachebuster_ui_deployer
     type: com.sap.html5.application-content
     path: cachebuster_ui_deployer
@@ -31,6 +31,10 @@ modules:
           artifacts:
             - './*'
           target-path: resources/ui5
+        - name: ui5_public
+          artifacts:
+            - './*'
+          target-path: resources/ui5_public
   - name: cachebuster-db
     type: hdb
     path: db
@@ -55,6 +59,13 @@ modules:
   - name: ui5
     type: html5
     path: ui5
+    build-parameters:
+      builder: grunt
+      supported-platforms: []
+      build-result: dist
+  - name: ui5_public
+    type: html5
+    path: ui5_public
     build-parameters:
       builder: grunt
       supported-platforms: []
