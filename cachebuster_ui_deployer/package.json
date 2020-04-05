@@ -1,7 +1,7 @@
 {
 	"name": "approuterUIDeployer",
 	"engines": {
-		"node": ">=6.0.0"
+		"node": ">=12.0.0"
 	},
 	"dependencies": {
 		"@sap/html5-app-deployer": "2.0.0"
