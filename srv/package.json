@@ -3,12 +3,12 @@
     "description": "Generated from ../package.json, do not change!",
     "version": "1.0.0",
     "dependencies": {
-        "@sap/cds": "^3.21.1",
+        "@sap/cds": "^3.33.1",
         "express": "^4.17.1",
         "hdb": "^0.17.1"
     },
     "engines": {
-        "node": "^8.9",
+        "node": "^12",
         "npm": "^6"
     },
     "devDependencies": {},
