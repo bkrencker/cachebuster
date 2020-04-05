@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/trialemmiui5-1.0.0/index.html",
+  "welcomeFile": "/trialemmiui5/index.html",
   "authenticationMethod": "route",
   "routes": [
     {
@@ -10,7 +10,7 @@
       "csrfProtection": false
     }, {
       "source": "^/app/(.*)$",
-      "target": "/trialemmiui5-1.0.0/$1",
+      "target": "/trialemmiui5/$1",
       "service": "html5-apps-repo-rt",
       "authenticationType": "xsuaa"
     }, {
