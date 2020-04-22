@@ -1,7 +1,9 @@
 # cachebuster
 Multiple ui5 Modules in CAP project using Cache-Buster
 
-https://launchpad.support.sap.com/#/incident/pointer/002075129500000470322020
+See
+	o) https://launchpad.support.sap.com/#/incident/pointer/002075129500000470322020
+	o) https://github.com/bkrencker/cachebuster
 
 The app is working with following URLs:
 	o) Protected App:
